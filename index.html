@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4f46e5" />
+    <meta
+      name="description"
+      content="BudgetWise is a serverless budget tracker for personal expenses and budget management."
+    />
+    <title>BudgetWise</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">BudgetWise</p>
+          <h1>Monthly planner</h1>
+        </div>
+      </header>
+
+      <section class="summary-grid">
+        <article class="chart-card">
+          <div class="chart-header">
+            <span>Budget split</span>
+            <strong id="chart-total-label">$0.00</strong>
+          </div>
+          <div id="budget-pie-chart" class="budget-pie-chart" aria-label="Budget distribution chart"></div>
+          <div id="chart-legend" class="chart-legend"></div>
+        </article>
+        <article class="stat-card">
+          <span>Total budget</span>
+          <strong id="total-budget">$0.00</strong>
+        </article>
+        <article class="stat-card">
+          <span>Total spent</span>
+          <strong id="total-spent">$0.00</strong>
+        </article>
+        <article class="stat-card accent">
+          <span>Remaining</span>
+          <strong id="total-remaining">$0.00</strong>
+        </article>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Budget overview</h2>
+            <p>Keep every activity within its assigned limit.</p>
+          </div>
+          <div id="budgets-list" class="budgets-list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Set or edit budget</h2>
+            <p>Adjust any category whenever your plan changes.</p>
+          </div>
+
+          <form id="budget-form" class="stacked-form">
+            <input type="hidden" id="budget-id" />
+
+            <label>
+              Category name
+              <input id="budget-name" type="text" placeholder="e.g. Groceries" required />
+            </label>
+
+            <label>
+              Budget limit
+              <input id="budget-amount" type="number" min="0" step="0.01" placeholder="0.00" required />
+            </label>
+
+            <div class="form-actions">
+              <button type="submit" class="primary-btn">Save budget</button>
+              <button type="button" id="reset-budget-form" class="ghost-btn">Clear</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Add payment</h2>
+          <p>Every transaction updates the remaining balance instantly.</p>
+        </div>
+
+        <form id="expense-form" class="stacked-form expense-form">
+          <div class="field-row">
+            <label>
+              Category
+              <select id="expense-category" required></select>
+            </label>
+
+            <label>
+              Amount
+              <input id="expense-amount" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+            </label>
+          </div>
+
+          <div class="field-row">
+            <label>
+              Date
+              <input id="expense-date" type="date" required />
+            </label>
+
+            <label>
+              Note
+              <input id="expense-note" type="text" maxlength="60" placeholder="Lunch, fuel, rent..." />
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="primary-btn">Add payment</button>
+            <button type="button" id="reset-expense-form" class="ghost-btn">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Monthly saving balance</h2>
+          <p>Your remaining budget by month based on planned spending.</p>
+        </div>
+        <div id="monthly-savings-list" class="monthly-savings-list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Recent activity</h2>
+          <p>Your latest payments by category.</p>
+        </div>
+        <div id="transactions-list" class="transactions-list"></div>
+      </section>
+
+      <footer class="bottom-actions">
+        <button id="theme-toggle-btn" class="secondary-btn" type="button">Dark mode</button>
+        <button id="export-email-sheet-btn" class="primary-btn" type="button">Export Excel</button>
+        <button id="install-app-btn" class="primary-btn" type="button" hidden>Install app</button>
+        <button id="change-email-btn" class="secondary-btn" type="button">Change email</button>
+      </footer>
+    </div>
+
+    <div id="email-modal" class="modal visible" aria-modal="true">
+      <div class="modal-card">
+        <div class="modal-badge">Serverless profile</div>
+        <h2>Welcome to BudgetWise</h2>
+        <p>
+          Enter your email to keep your budget data separate and private for this profile.
+        </p>
+
+        <form id="email-form" class="stacked-form">
+          <label>
+            Email address
+            <input id="email-input" type="email" placeholder="name@example.com" required />
+          </label>
+
+          <button type="submit" class="primary-btn">Continue</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

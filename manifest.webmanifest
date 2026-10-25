@@ -1,0 +1,17 @@
+{
+  "name": "BudgetWise",
+  "short_name": "BudgetWise",
+  "description": "A personal, serverless budgeting app for tracking expenses and budgets.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f3f5ff",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
